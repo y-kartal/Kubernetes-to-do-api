@@ -1,1 +1,26 @@
+version: "3.7"
+
+services:
+    database:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: xxxxxx
+            MYSQL_DATABASE: xxxxxx
+            MYSQL_USER: xxxxxx
+            MYSQL_PASSWORD: xxxxxx
+        networks:
+            - mynet
+    myapp:
+        build: .
+        restart: always
+        depends_on:
+            - database
+        ports:
+            - "80:80"
+        networks:
+            - mynet
+
+networks:
+    mynet:
+        driver: bridge
 
